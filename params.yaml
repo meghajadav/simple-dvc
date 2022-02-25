@@ -1,0 +1,23 @@
+base: 
+  project: winequality-project
+  random_state: 42
+  target_col: TARGET
+
+data_source:
+  s3_source: data_given\winequalityN.csv
+
+load_data:
+  raw_dataset_csv: data\raw\winequality.csv
+
+split_data:
+  train_data: train_data\processed\train_winequality.csv
+  test_data: test_data\processed\test_winequality.csv
+  test_size: 0.2
+
+estimators:
+  ElasticNet:
+    params:
+      l1_ratio: 0.88
+      alpha: 0.89
+
+models_dir: save_models
