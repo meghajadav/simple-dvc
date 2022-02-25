@@ -10,8 +10,8 @@ load_data:
   raw_dataset_csv: data\raw\winequality.csv
 
 split_data:
-  train_data: train_data\processed\train_winequality.csv
-  test_data: test_data\processed\test_winequality.csv
+  train_data: data\processed\train_winequality.csv
+  test_data: data\processed\test_winequality.csv
   test_size: 0.2
 
 estimators:

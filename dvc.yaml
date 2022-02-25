@@ -7,3 +7,12 @@ stages:
     - data_given\winequalityN.csv
     outs:
     - data\raw\winequality.csv
+
+  split_data:
+    cmd: python src\split_data.py --config=params.yaml
+    deps:
+    - data\raw\winequality.csv
+    - src\split_data.py
+    outs:
+    - data\processed\train_winequality.csv
+    - data\processed\test_winequality.csv
