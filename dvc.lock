@@ -55,6 +55,6 @@ stages:
     - path: report\scores.json
       md5: ef917d08bb5d1f913a562409ac67d36c
       size: 100
-    - path: saved_models\model.joblib
+    - path: save_models\model.joblib
       md5: ff6e98c932479e7479044b40c7446fab
       size: 1316
