@@ -24,6 +24,8 @@ git push origin main
 
 python src\get_data.py
 
+
+
 python load_data.py
 
 dvc repro
@@ -33,3 +35,26 @@ git add .
 git commit -m 'stage 1 complete'
 
 git push origin main
+
+tox command
+'''
+tox
+'''
+tox rebuilding
+'''
+tox -r
+'''
+pytest command
+'''
+pytest -v
+'''
+
+setup commands
+'''
+pip install -e .
+'''
+
+build your own package commands
+'''
+python setup.py sdist bdist_wheel
+'''
