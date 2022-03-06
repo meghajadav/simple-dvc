@@ -5,8 +5,11 @@ import joblib
 import numpy as np 
 
 params_path = 'params.yaml'
+webapp_path = 'webapp'
+static_dir = os.path.join(webapp_path, 'static')
+template_dir = os.path.join(webapp_path, 'templates')
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder =static_dir, template_folder=template_dir)
 
 def read_params(config_path):
     with open(config_path) as yaml_file:
@@ -23,6 +26,7 @@ def predict(data):
 
 def api_response(data):
     try:
+        # print('---------------', request.json.values())
         data = np.array([list(request.json.values())])
         response = predict(data)
         response = {"response":response}
@@ -38,18 +42,21 @@ def index():
         try:
             if request.form:
                 data = dict(request.form).values()
-                data = list(map(float, data))
-                response = predict(data)
+                data = [list(map(float, data))]
+                response = predict(np.array(data))
                 return render_template('index.html', response=response)
        
             elif request.json:
                 response = api_response(request)
+                # print('--------------------------',request)
                 return jsonify(response)
 
         except Exception as e:
             print(e)
             error = {'error':'Something went wrong. Please try again.'}
             return render_template('404.html', error=error)
+    else:
+        return render_template('index.html')
     
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5000, debug=True)
