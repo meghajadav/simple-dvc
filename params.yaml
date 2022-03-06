@@ -28,4 +28,6 @@ reports:
 
 models_dir: save_models
 
+web_app_dir: prediction_service\model\model.joblib
+
 
