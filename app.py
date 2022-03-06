@@ -18,8 +18,8 @@ def read_params(config_path):
 
 def predict(data):
     config = read_params(params_path)
-    saved_model_path = config['web_app_dir']
-    model = joblib.load(saved_model_path)
+    model_path = config['web_app_dir']
+    model = joblib.load(model_path)
     pred = model.predict(data)
     print(pred)
     return pred[0]
