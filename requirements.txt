@@ -1,6 +1,12 @@
+
+#local package install
+-e .
+# third party package
+
 dvc
 dvc[ignore]
 sklearn
 pandas
 pytest 
 tox
+flake8

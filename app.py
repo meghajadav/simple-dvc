@@ -36,14 +36,20 @@ def api_response(data):
 def index():
     if request.method=='POST':
         try:
-            if request.json:
+            if request.form:
+                data = dict(request.form).values()
+                data = list(map(float, data))
+                response = predict(data)
+                return render_template('index.html', response=response)
+       
+            elif request.json:
                 response = api_response(request)
                 return jsonify(response)
 
         except Exception as e:
             print(e)
             error = {'error':'Something went wrong. Please try again.'}
-            return error
+            return render_template('404.html', error=error)
     
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5000, debug=True)
