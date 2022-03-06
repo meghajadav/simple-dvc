@@ -33,7 +33,7 @@ def api_response(data):
         return response
     except Exception as e:
         print(e)
-        error = {'error': 'something went wrong. Please try again.'}
+        error = {'error': str(e)}
         return error
 
 @app.route('/', methods = ['POST', 'GET'])
@@ -53,7 +53,7 @@ def index():
 
         except Exception as e:
             print(e)
-            error = {'error':'Something went wrong. Please try again.'}
+            error = {'error':str(e)}
             return render_template('404.html', error=error)
     else:
         return render_template('index.html')
