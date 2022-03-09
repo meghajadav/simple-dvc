@@ -2,6 +2,7 @@ import os
 import joblib
 import yaml
 import json
+import numpy as np
 
 
 schema_file = os.path.join('prediction_service','schema_in.json')
