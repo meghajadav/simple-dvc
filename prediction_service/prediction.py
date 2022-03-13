@@ -72,12 +72,15 @@ def form_response(dict_response):
         return response 
 
 def api_response(dict_response):
+    f = ''
     try:
         if validate_input(dict_response):
             data = np.array([list(dict_response.values())])
+            f = 'data created successfullly.'
             predic = predict(data)
+            f = f+' prdiction done successfully'
             response = {'response':predic}
             return response
     except Exception as e:
-            response = {'Expected range':getSchema(schema_file) , "response": str(e)}
+            response = {'Expected range':getSchema(schema_file) , "response": str(e+f)}
             return response 
