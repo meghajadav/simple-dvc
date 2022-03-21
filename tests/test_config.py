@@ -19,8 +19,7 @@ input_data = {
     },
 
     'incorrect_col':
-    {
-        
+    {        
     "fixed acidity":789789,
     "volatile acidity": 555,
     "citric acid": 99,

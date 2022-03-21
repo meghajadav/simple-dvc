@@ -35,6 +35,7 @@ class NotInRange(Exception):
         super().__init__(self.message)
 
 class NotInCols(Exception):
+    print('entered Not in columns')
     def __init__(self, message="Not in columns."):
         self.message = message
         super().__init__(self.message)
@@ -46,18 +47,34 @@ def getSchema(schema_path):
 
 
 def validate_input(dict_response):
+    # print('entered validate input')
+    # def num_of_cols():
+    #     # print('entered num_of_cols::')
+    #     schema = getSchema(schema_file)
+    #     for_num_cols = schema.keys()
+    #     # print('cols::',len(cols))
+    #     # print('dict_response.keys()::', len(dict_response.keys()))
+    #     if len(for_num_cols) != len(dict_response.keys()):
+    #         # print('entered if')
+    #         raise NotInCols
+        
+
     def validate_cols(col):
+        print('entered validate cols')
         schema = getSchema(schema_file)
         cols = schema.keys()
         if col not in cols:
             raise NotInCols
 
     def validate_vals(col, val):
+        print('entered validate vals')
         schema = getSchema(schema_file)
-        if not (schema[col]['min'] <= float(val) <= schema[col]['max'] ):
+        if not (schema[col]['min'] <= float(dict_response[col]) <= schema[col]['max'] ):
             raise NotInRange
         
-
+    print("dict_response:: ",dict_response)
+    # num_of_cols()
+    
     for col, val in dict_response.items():
         print(validate_cols(col))
         print(validate_vals(col, val))
@@ -72,15 +89,28 @@ def form_response(dict_response):
         return response 
 
 def api_response(dict_response):
-    f = ''
+    f = 'Prediction Failed'
+    print('f:: ', f)
     try:
         if validate_input(dict_response):
+            f='Validat Passed' 
             data = np.array([list(dict_response.values())])
             f = 'data created successfullly.'
             predic = predict(data)
             f = f+' prdiction done successfully'
+            print('f::', f)
+            print(predic)
             response = {'response':predic}
+            
+            print(response)
             return response
+
+    except NotInRange as e:
+        response = {'NotInRange': getSchema(schema_file), "response": str(e)}
+        return response
+    except NotInCols as e:
+        response = {'NotInCols': getSchema(schema_file).keys(), "response": str(e)}
+        return response
     except Exception as e:
-            response = {'Expected range':getSchema(schema_file) , "response": str(e+f)}
-            return response 
+        response = {'Expected range':getSchema(schema_file) , "response": str(e)}
+        return response 
