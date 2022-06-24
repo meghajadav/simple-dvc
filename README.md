@@ -1,3 +1,9 @@
+WineQuality dataset from Kaggle is used for prediction.
+
+
+
+
+
 conda create -n wineq1 python=3.7 -y
 
 conda activate wineq1
