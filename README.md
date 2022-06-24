@@ -1,7 +1,6 @@
 WineQuality dataset from Kaggle is used for prediction.
 
-
-
+We used Data Version Contol to orchetrate the pipeline. 
 
 
 conda create -n wineq1 python=3.7 -y
